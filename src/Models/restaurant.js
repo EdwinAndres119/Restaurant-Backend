@@ -36,7 +36,7 @@ restaurant.init({
     sequelize: connection, 
     modelName : 'restaurant',
     paranoid: true,
-    deletedAt: 'destroyTime',
+    deleteAt: 'destroyTime',
 
 });
 

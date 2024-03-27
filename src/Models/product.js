@@ -20,7 +20,7 @@ product.init({
      type: DataTypes.STRING,
      allowNull: false
     },
-    productprice:{
+    productPrice:{
         type:DataTypes.FLOAT, 
         allowNull: false
 

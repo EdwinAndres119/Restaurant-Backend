@@ -1,20 +1,22 @@
 require('./DataBase/sync.js');
 
-const express = require('express');
 const connection = require('./DataBase/connection.js');
+const express = require('express');
 const app = express();
-const port = process.env.PORT|| 1337;
- 
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+const port = process.env.PORT || 1337;
 
-connection.sync({force : false})
-.then(()=> {
-    console.log('Base de datos sincronizada');
-    app.listen(port, ()=>{
-        console.log("la aplicacion corre en el puerto :"+ port);
-    })
-})
-.catch((error) =>{
-    console.error('Error al sincronizar la base de datos:', error);
+//routers
+const restaurantRouter = require('./Routers/restaurantRouters.js');
+const productRouter = require('./Routers/productsRouters.js');
+const departmentRouter = require('./Routers/departmentRouters.js');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false}));
+
+app.listen(port, ()=> {
+    console.log("The application is running on port: " + port);
 });
+//api
+app.use('/apiRes', restaurantRouter);
+app.use('/apiPro', productRouter);
+app.use('/apiDepar', departmentRouter);
